@@ -4,10 +4,10 @@ one:
   name: MyString
   category: MyString
   quantity: 1
-  invoice: one
+  invoice_id: 
 
 two:
   name: MyString
   category: MyString
   quantity: 1
-  invoice: two
+  invoice_id: 
