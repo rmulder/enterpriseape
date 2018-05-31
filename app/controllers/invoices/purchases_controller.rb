@@ -1,5 +1,5 @@
 class Invoices::PurchasesController < ApplicationController
-  before_action :set_invoice
+  before_action :set_invoice, except: [:index, :show]
   before_action :set_purchase, only: [:show, :edit, :update, :destroy]
 
   # GET /purchases
@@ -15,7 +15,6 @@ class Invoices::PurchasesController < ApplicationController
 
   # GET /purchases/new
   def new
-    #@invoice = Invoice.find(params[:invoice_id])
     @purchase = Purchase.new
   end
 
@@ -26,7 +25,6 @@ class Invoices::PurchasesController < ApplicationController
   # POST /purchases
   # POST /purchases.json
   def create
-    #@invoice = Invoice.find(params[:invoice_id])
     @purchase = Purchase.new(purchase_params)
     @purchase.invoice = @invoice
 
@@ -47,7 +45,7 @@ class Invoices::PurchasesController < ApplicationController
     respond_to do |format|
       if @purchase.update(purchase_params)
         format.html { redirect_to @invoice, notice: 'Purchase was successfully updated.' }
-        format.json { render :show, status: :ok, location: @purchase }
+        format.json { render :show, status: :ok, location: @invoice }
       else
         format.html { render :edit }
         format.json { render json: @purchase.errors, status: :unprocessable_entity }
@@ -58,8 +56,6 @@ class Invoices::PurchasesController < ApplicationController
   # DELETE /purchases/1
   # DELETE /purchases/1.json
   def destroy
-    #@invoice = Invoice.find(params[:invoice_id])
-    @purchase = Purchase.find(params[:id])
     title = @purchase.name
     
     if @purchase.destroy
